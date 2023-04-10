@@ -1,0 +1,57 @@
+[
+  {
+    "_id": "642495f32627ef8149ab4494",
+    "title": "iOS 16.4 and macOS 13.3 fix more than 30 security exploits - 9to5Mac",
+    "author": "Filipe Espósito",
+    "content": "Apple on Monday released iOS 16.4 and other software updates to the public. While they come with multiple new features, such as new emoji, notifications for web apps, and accessibility improvements, … [+2156 chars]",
+    "imageUrl": "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2022/11/ios-16-security.jpg?resize=1200%2C628&quality=82&strip=all&ssl=1",
+    "url": "https://9to5mac.com/2023/03/27/ios-16-4-macos-13-3-fix-security-exploits/",
+    "likes": 1,
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": "642495f32627ef8149ab4493",
+    "title": "MacStealer malware grabs passwords, files, and credit card details - 9to5Mac",
+    "author": "Ben Lovejoy",
+    "content": "Security researchers have identified a new piece of Mac malware, which they’ve dubbed MacStealer. The malware extracts your iCloud passwords, a wide variety of files, and credit card details stored i… [+2454 chars]",
+    "imageUrl": "https://i0.wp.com/9to5mac.com/wp-content/uploads/sites/6/2023/03/MacStealer-malware.jpg?resize=1200%2C628&quality=82&strip=all&ssl=1",
+    "url": "https://9to5mac.com/2023/03/28/macstealer-malware/",
+    "likes": 0,
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": "642495f32627ef8149ab4491",
+    "title": "Apple iOS 16.4: The new emoji you can use on iPhone - USA TODAY",
+    "author": "Brett Molina",
+    "content": "Own an iPhone? It's time for another update.\r\nApple rolled out the newest update for iPhones, iOS 16.4, which includes several features and security enhancements, along with a fresh batch of emojis.\r… [+1985 chars]",
+    "imageUrl": "https://www.gannett-cdn.com/presto/2023/02/18/USAT/6dfc4a72-382a-4b57-b301-b922440eba37-Apple_new_emojis_2023_handout.jpg?crop=939,529,x0,y0&width=939&height=529&format=pjpg&auto=webp",
+    "url": "https://www.usatoday.com/story/tech/2023/03/28/ios-update-emoji-apple/11555381002/",
+    "likes": 0,
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": "642cd542be959f45eeb08ad6",
+    "title": "WinRAR SFX archives can run PowerShell without being detected - BleepingComputer",
+    "author": "Bill Toulas",
+    "content": "Hackers are adding malicious functionality to WinRAR self-extracting archives that contain harmless decoy files, allowing them to plant backdoors without triggering the security agent on the target s… [+3238 chars]",
+    "imageUrl": "https://www.bleepstatic.com/content/hl-images/2022/08/21/compressed-folder-light-rays.jpg",
+    "url": "https://www.bleepingcomputer.com/news/security/winrar-sfx-archives-can-run-powershell-without-being-detected/",
+    "likes": 0,
+    "comments": [],
+    "__v": 0
+  },
+  {
+    "_id": "642eebe1d8776185a54ee20e",
+    "title": "Galaxy Z Flip 4, Fold 4 are first foldables to get April 2023 security update in the US - SamMobile - Samsung news",
+    "author": "SamMobile, Asif Iqbal Shaik",
+    "content": "Last week, Samsung released the April 2023 security update to the Galaxy S23 in South Korea and then in Europe. Now, more Galaxy smartphones have started getting the latest security update. The compa… [+1267 chars]",
+    "imageUrl": "https://www.sammobile.com/wp-content/uploads/2022/08/Galaxy-Z-Fold-4-review-27.jpg",
+    "url": "https://www.sammobile.com/news/galaxy-z-flip-fold-4-april-2023-security-update-usa-unlocked/",
+    "likes": 1,
+    "comments": [],
+    "__v": 0
+  }
+]
