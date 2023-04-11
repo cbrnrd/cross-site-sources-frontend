@@ -5,7 +5,6 @@ import SearchBar from "../SearchBar"
 const HomeComponent = () => {
   return (
     <>
-      <NavBar />
       <SearchBar />
       <ArticleCardGrid />
     </>

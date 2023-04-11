@@ -1,11 +1,13 @@
+import { Link } from 'react-router-dom';
+
 const NavBar = () => {
   return (
-    <nav class="bg-red-500 text-white px-4 py-3">
-      <div class="flex justify-between items-center">
-        <a href="#" class="text-lg font-bold">XSS</a>
-        <ul class="flex">
-          <li><a href="#" class="ml-4">Home</a></li>
-          <li><a href="#" class="ml-4">Log In/Register</a></li>
+    <nav className="bg-red-500 text-white px-4 py-3">
+      <div className="flex justify-between items-center">
+        <Link className="text-lg font-bold" to='/'>XSS</Link>
+        <ul className="flex">
+          <li className="ml-4"><Link to='/'>Home</Link></li>
+          <li><a href="#" className="ml-4">Log In/Register</a></li>
         </ul>
       </div>
     </nav>
