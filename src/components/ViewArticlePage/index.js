@@ -1,13 +1,17 @@
-import articles from '../ArticleCardGrid/articles.json'
 import { useParams } from 'react-router-dom'
 import CommentsList from '../CommentsList'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 
 const ViewArticlePage = (props) => {
-    let { id } = useParams()
+    const dispatch = useDispatch()
+    const { articles, loading } = useSelector(state => state.articles)  // Get articles from redux store
+    let { id } = useParams()  // Get id from url
     const article = articles.find(article => article._id == id)
     if (!article) {
-        return <h1>Article not found</h1>
+        // Centered H1
+        return <h1 className="text-3xl font-bold mb-2 text-center">Article not found</h1>
     }
     return (
         <>

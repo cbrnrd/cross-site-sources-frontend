@@ -57,12 +57,30 @@ export const getFrontpageArticles = createAsyncThunk(
     }
 )
 
-export const getArticle = async (id) => {
-    try{
-        const res = await api.get(ARTICLE_URL + '/' + id)
-        return res
-    } catch (err) {
-        console.log("Error getting article: ", err)
-        return err.response
+export const getArticle = createAsyncThunk(
+    'articles/getArticle',
+    async (id) => {
+        try{
+            const res = await api.get(ARTICLE_URL + '/' + id)
+            return res.data
+        } catch (err) {
+            console.log("Error getting article: ", err)
+            return err
+        }
     }
-}
+)
+
+export const searchArticlesThunk = createAsyncThunk(
+    'articles/searchArticles',
+    async (searchTerm) => {
+        const {q} = searchTerm
+        console.log('Search term: ', q)
+        try{
+            const res = await api.get(ARTICLE_URL + '/search', {params: {q: searchTerm}})
+            return res.data
+        } catch (err) {
+            console.log("Error searching articles: ", err)
+            return err
+        }
+    }
+)
