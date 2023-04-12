@@ -4,18 +4,35 @@ import HomeComponent from './components/HomeComponent';
 import NavBar from './components/NavBar';
 import ViewArticlePage from './components/ViewArticlePage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LoginPage from './components/LoginPage';
+import { Provider } from 'react-redux';
+import { configureStore, createSlice } from '@reduxjs/toolkit'
+import articlesReducer from './reducers/articles-reducer';
+import userReducer from './reducers/user-reducer';
+
+
+const store = configureStore({
+  reducer: {
+    articles: articlesReducer,
+    user: userReducer
+  }
+})
+
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="w-full">
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<HomeComponent />} />
-        <Route path="/article/:id" element={<ViewArticlePage />} />
-      </Routes>
-    </div>
-    </BrowserRouter >
+    <Provider store={store}>
+      <BrowserRouter>
+        <div className="w-full">
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<HomeComponent />} />
+            <Route path="/article/:id" element={<ViewArticlePage />} />
+            <Route path="/login" element={<LoginPage />} />
+          </Routes>
+        </div>
+      </BrowserRouter >
+    </Provider>
   );
 }
 
