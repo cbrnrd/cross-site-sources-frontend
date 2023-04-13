@@ -73,10 +73,14 @@ export const getArticle = createAsyncThunk(
 export const searchArticlesThunk = createAsyncThunk(
     'articles/searchArticles',
     async (searchTerm) => {
+        if (searchTerm === undefined) {
+            searchTerm = 'test'
+        }
         const {q} = searchTerm
         console.log('Search term: ', q)
         try{
             const res = await api.get(ARTICLE_URL + '/search', {params: {q: searchTerm}})
+            console.log('Response from thunk: ', res.data)
             return res.data
         } catch (err) {
             console.log("Error searching articles: ", err)

@@ -1,29 +1,63 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import ArticleCard from "../ArticleCard";
+import { Link } from "react-router-dom";
+import { searchBackend } from "../../service";
 import { searchArticlesThunk } from "../../thunks";
+/*
+{
+  internalArticles: [],
+  externalArticles: []
+}
+*/
+const showArticles = (articles) => {
+  console.log("Articles: ", articles);
+  const internal = articles.internalArticles;
+  const externalArticles = articles.externalArticles;
+  return (
+    <>
+      <h1 className="text-3xl font-bold text-center">Internal Articles</h1>
+      {internal.map((article) => (
+        <ArticleCard key={article.id} article={article} />
+      ))}
+      <br></br>
+      <h1 className="text-3xl font-bold text-center">External Articles</h1>
+      {externalArticles.map((article) => (
+        <Link to={article.url}><ArticleCard key={article.id} article={article} /></Link>
+      ))}
+    </>
+  )
+}
 
-const SearchResults = () => {
-  // get query from `q` param
-  const { q } = useParams();
-  const dispatch = useDispatch();
-  const { searchArticles, loading } = useSelector((state) => state.articles);
+const SearchResults = ({q}) => {
 
-  // dispatch search thunk
+  //const [articles, setArticles] = useState({})
+  const { searchArticles, loading } = useSelector(state => state.articles)
+  const [ searchQuery, setSearchQuery ] = useState('')
+  const dispatch = useDispatch()
+
+  console.log(q)
+
   useEffect(() => {
-    dispatch(searchArticlesThunk(q));
-  }, [dispatch, q]);
+    console.log('In useEffect, q=', searchQuery)
+    dispatch(searchArticlesThunk())
+  }, [dispatch])
+
+  setSearchQuery(q)
 
   return (
-    <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        searchArticles.map((article) => <ArticleCard article={article} />)
-      )}
+    <div className="flex flex-col items-center justify-center w-full h-full">
+      {loading ? (<div className="text-3xl font-bold text-center">Loading...</div>) :
+        showArticles(searchArticles)}
     </div>
-  );
+  )
+
+  // return (
+  //   <div className="flex flex-col items-center justify-center w-full h-full">
+  //     {articles ? showArticles(articles) : <h1 className="text-3xl font-bold text-center">No results</h1>}
+  //   </div>
+  // );
 
 }
 

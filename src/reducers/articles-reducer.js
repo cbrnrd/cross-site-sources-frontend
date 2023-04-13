@@ -33,13 +33,16 @@ const articlesSlice = createSlice({
             state.loading = false
         },
         [searchArticlesThunk.pending]: (state, action) => {
+            console.log('pending: ', action)
             state.loading = true
         },
         [searchArticlesThunk.fulfilled]: (state, action) => {
             state.loading = false
+            console.log('action.payload: ', action.payload)
             state.searchArticles = action.payload
         },
         [searchArticlesThunk.rejected]: (state, action) => {
+            console.log('rejected: ', action)
             state.loading = false
         }
 

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { createSearchParams, useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
   const navigate = useNavigate()
@@ -6,7 +6,7 @@ const SearchBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const searchQuery = e.target[0].value;
-    navigate(`/search`, {state: { q: searchQuery }});
+    navigate({pathname: `/search`, search: `?${createSearchParams({q: searchQuery})}`});
   }
   return (
     <div className="max-w-3xl mx-auto mt-4 mb-8">

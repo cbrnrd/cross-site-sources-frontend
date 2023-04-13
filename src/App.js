@@ -3,7 +3,7 @@ import './App.css';
 import HomeComponent from './components/HomeComponent';
 import NavBar from './components/NavBar';
 import ViewArticlePage from './components/ViewArticlePage';
-import SearchResults from './components/SearchResults';
+import SearchResultsPage from './components/SearchResultsPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import { Provider } from 'react-redux';
@@ -30,7 +30,7 @@ function App() {
             <Route path="/" element={<HomeComponent />} />
             <Route path="/article/:id" element={<ViewArticlePage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/search" element={<SearchResults />} />
+            <Route path="/search" element={<SearchResultsPage />} />
           </Routes>
         </div>
       </BrowserRouter >
