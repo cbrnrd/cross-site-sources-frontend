@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import ArticleCard from "../ArticleCard";
 import { Link } from "react-router-dom";
 import { searchBackend } from "../../service";
@@ -30,35 +29,44 @@ const showArticles = (articles) => {
   )
 }
 
-const SearchResults = ({q}) => {
+const SearchResults = ({articles, loading}) => {
+  console.log("Articles: ", articles);
+  console.log("Loading: ", loading);
 
-  //const [articles, setArticles] = useState({})
-  const { searchArticles, loading } = useSelector(state => state.articles)
-  const [ searchQuery, setSearchQuery ] = useState('')
+  return (
+    <div className="flex flex-col items-center justify-center w-full h-full">
+      {loading ? (
+        <div className="text-3xl font-bold text-center">Loading...</div>
+      ) : showArticles(articles)}
+    </div>
+  )
+}
+
+
+/*
+const SearchResults = ({ searchQuery }) => {
   const dispatch = useDispatch()
-
-  console.log(q)
+  const { articles, loading, error } = useSelector((state) => state.search)
 
   useEffect(() => {
-    console.log('In useEffect, q=', searchQuery)
-    dispatch(searchArticlesThunk())
-  }, [dispatch])
+    dispatch(searchArticlesThunk(searchQuery))
+  }, [dispatch, searchQuery])
 
-  setSearchQuery(q)
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
+  if (error) {
+    return <div>{error.message}</div>
+  }
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
       {loading ? (<div className="text-3xl font-bold text-center">Loading...</div>) :
-        showArticles(searchArticles)}
+        showArticles(articles)}
     </div>
   )
-
-  // return (
-  //   <div className="flex flex-col items-center justify-center w-full h-full">
-  //     {articles ? showArticles(articles) : <h1 className="text-3xl font-bold text-center">No results</h1>}
-  //   </div>
-  // );
-
 }
 
+*/
 export default SearchResults;

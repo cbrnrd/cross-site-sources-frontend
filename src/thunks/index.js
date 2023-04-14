@@ -20,7 +20,7 @@ const api = axios.create({
 export const loginThunk = createAsyncThunk(
     'user/login',
     async (credentials) => {
-        try{
+        try {
             const res = await api.post(LOGIN_URL, credentials)
             return res.data
         } catch (err) {
@@ -33,7 +33,7 @@ export const loginThunk = createAsyncThunk(
 export const logoutThunk = createAsyncThunk(
     'user/logout',
     async () => {
-        try{
+        try {
             const res = await api.get(LOGOUT_URL)
             return res.data
         }
@@ -47,7 +47,7 @@ export const logoutThunk = createAsyncThunk(
 export const getFrontpageArticles = createAsyncThunk(
     'articles/getFrontpageArticles',
     async () => {
-        try{
+        try {
             const res = await api.get(ARTICLE_URL)
             return res.data.internalArticles
         } catch (err) {
@@ -60,7 +60,7 @@ export const getFrontpageArticles = createAsyncThunk(
 export const getArticle = createAsyncThunk(
     'articles/getArticle',
     async (id) => {
-        try{
+        try {
             const res = await api.get(ARTICLE_URL + '/' + id)
             return res.data
         } catch (err) {
@@ -71,20 +71,14 @@ export const getArticle = createAsyncThunk(
 )
 
 export const searchArticlesThunk = createAsyncThunk(
-    'articles/searchArticles',
-    async (searchTerm) => {
-        if (searchTerm === undefined) {
-            searchTerm = 'test'
-        }
-        const {q} = searchTerm
-        console.log('Search term: ', q)
-        try{
-            const res = await api.get(ARTICLE_URL + '/search', {params: {q: searchTerm}})
-            console.log('Response from thunk: ', res.data)
-            return res.data
-        } catch (err) {
-            console.log("Error searching articles: ", err)
-            return err
+    'search/searchArticles',
+    async (searchQuery, thunkAPI) => {
+        try {
+            console.log("IN THUNK: ", searchQuery)
+            const response = await api.get(ARTICLE_URL + '/search', { params: { q: searchQuery } })
+            return response.data
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data)
         }
     }
 )

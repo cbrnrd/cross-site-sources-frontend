@@ -10,11 +10,13 @@ import { Provider } from 'react-redux';
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 import articlesReducer from './reducers/articles-reducer';
 import userReducer from './reducers/user-reducer';
+import searchReducer from './reducers/search-reducer';
 
 
 const store = configureStore({
   reducer: {
     articles: articlesReducer,
+    search: searchReducer,
     user: userReducer
   }
 })
