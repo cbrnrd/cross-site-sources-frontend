@@ -1,18 +1,34 @@
 import { useParams } from 'react-router-dom'
 import CommentsList from '../CommentsList'
+import CommentBox from '../CommentBox'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import { getArticle } from '../../thunks'
+import { useState } from 'react'
 
 
 const ViewArticlePage = (props) => {
     const dispatch = useDispatch()
-    const { articles, loading } = useSelector(state => state.articles)  // Get articles from redux store
+    let { articles, article, article2, loading } = useSelector(state => state.articles)  // Get articles from redux store
     let { id } = useParams()  // Get id from url
-    const article = articles.find(article => article._id == id)
+
+    article = articles.find(article => article._id === id)  // Find article with id
+
+    useEffect(() => {
+        dispatch(getArticle(id))  // Dispatch getArticle thunk
+    }, [])
+
+
+    if (loading) {
+        // Centered H1
+        return <h1 className="text-3xl font-bold mb-2 text-center">Loading...</h1>
+    }
+
     if (!article) {
         // Centered H1
         return <h1 className="text-3xl font-bold mb-2 text-center">Article not found</h1>
     }
+
     return (
         <>
             {/* Centered text with title and content*/}
@@ -28,6 +44,7 @@ const ViewArticlePage = (props) => {
                 </div>
             </div>
 
+            <CommentBox articleId={article._id} />
             {/* CommentsList component */}
             <CommentsList comments={article.comments} />
         </>

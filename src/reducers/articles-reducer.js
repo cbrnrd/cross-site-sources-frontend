@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { getFrontpageArticles, getArticle } from "../thunks"
+import { getFrontpageArticles, getArticle, postCommentThunk } from "../thunks"
 
 const initialState = {
     articles: [],
+    // store a single article for viewing
+    article: {},
+    article2: {},
     loading: false
 }
 
@@ -26,11 +29,15 @@ const articlesSlice = createSlice({
         },
         [getArticle.fulfilled]: (state, action) => {
             state.loading = false
-            state.articles = action.payload
+            state.article = action.payload
+            state.article2 = action.payload
         },
         [getArticle.rejected]: (state, action) => {
             state.loading = false
         },
+        [postCommentThunk.fulfilled]: (state, action) => {
+            state.article.comments.push(action.payload)
+        }
 
     }
 })

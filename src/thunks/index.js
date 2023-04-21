@@ -75,7 +75,9 @@ export const getArticle = createAsyncThunk(
     'articles/getArticle',
     async (id) => {
         try {
+            console.log("Getting article with id: ", id, " from url: ", ARTICLE_URL + '/' + id)
             const res = await api.get(ARTICLE_URL + '/' + id)
+            console.log("Response from getArticle: ", res.data)
             return res.data
         } catch (err) {
             console.log("Error getting article: ", err)
@@ -90,6 +92,18 @@ export const searchArticlesThunk = createAsyncThunk(
         try {
             console.log("IN THUNK: ", searchQuery)
             const response = await api.get(ARTICLE_URL + '/search', { params: { q: searchQuery } })
+            return response.data
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
+    }
+)
+
+export const postCommentThunk = createAsyncThunk(
+    'comments/postComment',
+    async ({comment, articleId}, thunkAPI) => {
+        try {
+            const response = await api.post(ARTICLE_URL + "/comment", { text: comment }, { params: { id: articleId }})
             return response.data
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data)
