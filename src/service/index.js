@@ -19,7 +19,7 @@ const api = axios.create({
 export const searchBackend = async (searchTerm) => {
   console.log("search term: ", searchTerm)
   try {
-    const res = await api.get(ARTICLE_URL + `?${createSearchParams({q: searchTerm})}`)
+    const res = await api.get(ARTICLE_URL + `/search?${createSearchParams({q: searchTerm})}`)
     console.log("Response data:: ", res.data)
     return res.data
   } catch (err) {

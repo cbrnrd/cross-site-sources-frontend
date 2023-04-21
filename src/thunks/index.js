@@ -4,6 +4,7 @@ import { createAsyncThunk }
 
 const BACKEND_URL = process.env.BACKEND_API || 'http://localhost:5000/api'
 const LOGIN_URL = BACKEND_URL + '/auth/login'
+const REGISTER_URL = BACKEND_URL + '/auth/signup'
 const ARTICLE_URL = BACKEND_URL + '/articles'
 const LOGOUT_URL = BACKEND_URL + '/auth/logout'
 
@@ -26,6 +27,19 @@ export const loginThunk = createAsyncThunk(
         } catch (err) {
             console.log("Error logging in: ", err)
             return err.response
+        }
+    }
+)
+
+export const registerThunk = createAsyncThunk(
+    'user/register',
+    async (credentials,  { rejectWithValue }) => {
+        try {
+            const res = await api.post(REGISTER_URL, credentials)
+            return res.data
+        } catch (err) {
+            console.log("Error registering: ", err)
+            return rejectWithValue(err.response.data)
         }
     }
 )
