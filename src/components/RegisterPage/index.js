@@ -11,7 +11,8 @@ const RegisterPage = () => {
     const { isLoggedIn, jwt, error } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const register = async () => {
+    const register = async (e) => {
+        e.preventDefault()
         try {
             const res = await dispatch(registerThunk({ email, name, password }))
             console.log("res:: ", res)

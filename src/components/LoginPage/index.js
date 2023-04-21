@@ -10,7 +10,8 @@ const LoginPage = () => {
     const { isLoggedIn, jwt } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const login = async () => {
+    const login = async (e) => {
+        e.preventDefault()
         try {
             const res = await dispatch(loginThunk({ email, password }))
             console.log("res:: ", res)
