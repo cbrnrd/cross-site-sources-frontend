@@ -24,6 +24,9 @@ const store = configureStore({
 
 
 function App() {
+  // Check if `jwt` is in localStorage
+  // If it is, set `isLoggedIn` to true
+  // If it is not, set `isLoggedIn` to false
   return (
     <Provider store={store}>
       <BrowserRouter>

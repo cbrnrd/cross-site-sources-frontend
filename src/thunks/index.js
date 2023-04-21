@@ -49,6 +49,8 @@ export const logoutThunk = createAsyncThunk(
     async () => {
         try {
             const res = await api.get(LOGOUT_URL)
+            // Remote `jwt` from localStore
+            localStorage.removeItem('jwt')
             return res.data
         }
         catch (err) {
@@ -104,6 +106,18 @@ export const postCommentThunk = createAsyncThunk(
     async ({comment, articleId}, thunkAPI) => {
         try {
             const response = await api.post(ARTICLE_URL + "/comment", { text: comment }, { params: { id: articleId }})
+            return response.data
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
+    }
+)
+
+export const likeArticleThunk = createAsyncThunk(
+    'articles/likeArticle',
+    async (articleId, thunkAPI) => {
+        try {
+            const response = await api.post(ARTICLE_URL + "/like", {}, { params: { id: articleId }})
             return response.data
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data)
