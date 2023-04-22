@@ -1,7 +1,10 @@
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { logoutThunk } from '../../thunks';
+import { logoutThunk, isUserLoggedInThunk } from '../../thunks';
 import { useDispatch } from 'react-redux';
+
+import jwt_decode from 'jwt-decode'
+import { useEffect } from 'react';
 
 
 const NavBar = () => {
@@ -9,6 +12,12 @@ const NavBar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { isLoggedIn, jwt } = useSelector(state => state.user)
+  
+  useEffect(() => {
+      console.log("called")
+      dispatch(isUserLoggedInThunk())
+  }, [])
+
   return (
     <nav className="bg-red-500 text-white px-4 py-3">
       <div className="flex justify-between items-center">

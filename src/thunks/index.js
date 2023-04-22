@@ -1,6 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk }
     from "@reduxjs/toolkit"
+import jwt_decode from 'jwt-decode'
+
 
 const BACKEND_URL = process.env.BACKEND_API || 'http://localhost:5000/api'
 const LOGIN_URL = BACKEND_URL + '/auth/login'
@@ -139,5 +141,24 @@ export const likeArticleThunk = createAsyncThunk(
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data)
         }
+    }
+)
+
+export const isUserLoggedInThunk = createAsyncThunk(
+    'user/isUserLoggedIn',
+    async () => {
+        // Check if jwt is expired
+        let jwt = localStorage.getItem('jwt')
+        if (jwt) {
+            const decoded = jwt_decode(jwt)
+            const currentTime = Date.now() / 1000
+            if (decoded.exp < currentTime) {
+                console.log("JWT expired")
+                localStorage.removeItem('jwt')
+                return false
+            }
+            return true
+        }
+        return false
     }
 )

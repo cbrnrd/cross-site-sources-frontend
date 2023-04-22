@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
-import {loginThunk, registerThunk, logoutThunk, getUserThunk,} from "../thunks"
-import jwt from 'jwt-decode'
+import {loginThunk, registerThunk, logoutThunk, getUserThunk, isUserLoggedInThunk } from "../thunks"
+import jwt_decode from 'jwt-decode'
 
 const initialState = {
     isLoggedIn: false,
@@ -19,8 +19,8 @@ const userSlice = createSlice({
         [loginThunk.fulfilled]: (state, action) => {
             state.isLoggedIn = true
             state.jwt = action.payload.token
-            state.role = jwt(action.payload.token).role
-            state.userId = jwt(action.payload.token).userId
+            state.role = jwt_decode(action.payload.token).role
+            state.userId = jwt_decode(action.payload.token).userId
             localStorage.setItem('jwt', action.payload.token)
             console.log("Role: ", state.role)
         },
@@ -32,8 +32,8 @@ const userSlice = createSlice({
         [registerThunk.fulfilled]: (state, action) => {
             state.isLoggedIn = true
             state.jwt = action.payload.token
-            state.role = jwt(action.payload.token).role
-            state.userId = jwt(action.payload.token).userId
+            state.role = jwt_decode(action.payload.token).role
+            state.userId = jwt_decode(action.payload.token).userId
             localStorage.setItem('jwt', action.payload.token)
             console.log("Role: ", state.role)
         },
@@ -43,11 +43,20 @@ const userSlice = createSlice({
             state.error = action.payload
         },
         [logoutThunk.fulfilled]: (state, action) => {
-            state = initialState
+            state.isLoggedIn = false
+            state.jwt = null
+            state.role = null
+            state.userId = null
+            state.user = []
+            localStorage.removeItem('jwt')
         },
         [getUserThunk.fulfilled]: (state, action) => {
             state.user = action.payload
             console.log(action.payload)
+        },
+        [isUserLoggedInThunk.fulfilled]: (state, action) => {
+            console.log("Setting isLoggedIn to: ", action)
+            state.isLoggedIn = action
         }
     }
 })
