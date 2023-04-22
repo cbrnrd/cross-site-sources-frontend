@@ -24,7 +24,7 @@ const LoginPage = () => {
             
         } catch (err) {
             console.log(err)
-            setServerError(err.response.data.message)
+            setServerError(err.message)
         }
     }
 

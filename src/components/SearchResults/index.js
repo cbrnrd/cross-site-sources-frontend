@@ -12,8 +12,8 @@ import { searchArticlesThunk } from "../../thunks";
 */
 const showArticles = (articles) => {
   console.log("Articles: ", articles);
-  const internal = articles.internalArticles;
-  const externalArticles = articles.externalArticles;
+  const internal = articles.internal;
+  const externalArticles = articles.external;
   return (
     <>
       <h1 className="text-3xl font-bold text-center">Internal Articles</h1>

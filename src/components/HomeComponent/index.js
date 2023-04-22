@@ -11,6 +11,9 @@ const HomeComponent = () => {
   const { isLoggedIn } = useSelector((state) => state.user)
   
   const jwtPresent = localStorage.getItem('jwt') ? true : false
+
+  console.log("JWT present: ", jwtPresent)
+  console.log("Is logged in: ", isLoggedIn)
   if (jwtPresent && !isLoggedIn) {
     dispatch(loginThunk(localStorage.getItem('jwt')))
   }

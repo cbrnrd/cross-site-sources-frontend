@@ -21,20 +21,20 @@ const api = axios.create({
 // Function to send credentials to the backend and set the JWT cookie
 export const loginThunk = createAsyncThunk(
     'user/login',
-    async (credentials) => {
+    async (credentials, { rejectWithValue }) => {
         try {
             const res = await api.post(LOGIN_URL, credentials)
             return res.data
         } catch (err) {
             console.log("Error logging in: ", err)
-            return err.response
+            return rejectWithValue(err.response.data)
         }
     }
 )
 
 export const registerThunk = createAsyncThunk(
     'user/register',
-    async (credentials,  { rejectWithValue }) => {
+    async (credentials, { rejectWithValue }) => {
         try {
             const res = await api.post(REGISTER_URL, credentials)
             return res.data

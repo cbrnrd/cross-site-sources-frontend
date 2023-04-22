@@ -1,4 +1,5 @@
 const CommentsList = ({ comments }) => {
+    console.log(comments)
     return (
         <>
             {/* rounded corners, drop shadow, and padding for each comment*/}
