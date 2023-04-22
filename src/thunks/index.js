@@ -7,6 +7,7 @@ const LOGIN_URL = BACKEND_URL + '/auth/login'
 const REGISTER_URL = BACKEND_URL + '/auth/signup'
 const ARTICLE_URL = BACKEND_URL + '/articles'
 const LOGOUT_URL = BACKEND_URL + '/auth/logout'
+const ID_URL = BACKEND_URL + '/user/:id'
 
 
 const api = axios.create({
@@ -55,6 +56,22 @@ export const logoutThunk = createAsyncThunk(
         }
         catch (err) {
             console.log("Error logging out: ", err)
+            return err.response
+        }
+    }
+)
+
+// Thunk to get ID data without logging out
+export const getidThunk = createAsyncThunk(
+    'user/getid',
+    async() => {
+        try {
+            console.log("Getting ID")
+            const res = await api.get(ID_URL)
+            return res.data.user
+        }
+        catch (err) {
+            console.log("Error fetching data: ", err)
             return err.response
         }
     }

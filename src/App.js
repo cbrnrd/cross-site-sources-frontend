@@ -7,6 +7,7 @@ import SearchResultsPage from './components/SearchResultsPage';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
+import ProfilePage from "./components/ProfilePage";
 import { Provider } from 'react-redux';
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 import articlesReducer from './reducers/articles-reducer';
@@ -38,6 +39,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/search" element={<SearchResultsPage />} />
+            <Route path="/profile" element={<ProfilePage/>}/>
           </Routes>
         </div>
       </BrowserRouter >
