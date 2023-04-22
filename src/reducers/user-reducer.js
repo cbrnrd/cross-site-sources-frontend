@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { loginThunk, registerThunk, logoutThunk,  } from "../thunks"
+import {loginThunk, registerThunk, logoutThunk, getUserThunk,} from "../thunks"
 import jwt from 'jwt-decode'
 
 const initialState = {
     isLoggedIn: false,
     jwt: null,
     role: null,
-    error: null
+    error: null,
+    userId: null,
+    user: []
 }
 
 const userSlice = createSlice({
@@ -18,6 +20,7 @@ const userSlice = createSlice({
             state.isLoggedIn = true
             state.jwt = action.payload.token
             state.role = jwt(action.payload.token).role
+            state.userId = jwt(action.payload.token).userId
             localStorage.setItem('jwt', action.payload.token)
             console.log("Role: ", state.role)
         },
@@ -30,6 +33,7 @@ const userSlice = createSlice({
             state.isLoggedIn = true
             state.jwt = action.payload.token
             state.role = jwt(action.payload.token).role
+            state.userId = jwt(action.payload.token).userId
             localStorage.setItem('jwt', action.payload.token)
             console.log("Role: ", state.role)
         },
@@ -40,6 +44,10 @@ const userSlice = createSlice({
         },
         [logoutThunk.fulfilled]: (state, action) => {
             state = initialState
+        },
+        [getUserThunk.fulfilled]: (state, action) => {
+            state.user = action.payload
+            console.log(action.payload)
         }
     }
 })

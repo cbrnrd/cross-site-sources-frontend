@@ -1,5 +1,5 @@
 import {getArticle, registerThunk} from '../../thunks'
-import {getidThunk} from "../../thunks";
+import {getUserThunk} from "../../thunks";
 import {useEffect, useState} from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
@@ -15,34 +15,18 @@ const ProfilePage = () => {
     const register = async (e) => {
         e.preventDefault()
         try {
-            const res = await dispatch(registerThunk({ email, name, password }))
-            console.log("res:: ", res)
-            if (res.meta.rejectedWithValue) {
-                setServerError(res.payload.message)
-                return
-            } else {
-                navigate('/')
-            }
 
         } catch (err) {
-            console.log(err)
-            setServerError(err.response.data.message)
+
         }
     }
 
     // Not entirely sure what I'm doing
-    let { username, user } = useSelector(state => state.user)
+    let { userId, user } = useSelector(state => state.user)
 
     useEffect(() => {
-        dispatch(getidThunk)  // Dispatch getid thunk
-        console.log("test")
+        dispatch(getUserThunk(userId))
     }, [])
-    //const id = dispatch(getidThunk)
-    console.log("id.name:: ", username)
-    /*
-    useEffect(() => {
-        dispatch(getidThunk)
-    })*/
     /*
     const changePass = async (e) => {
         e.preventDefault()
@@ -53,9 +37,7 @@ const ProfilePage = () => {
         }
     }
 */
-    if (isLoggedIn) {
-        navigate('/')
-    } else {
+    if (! isLoggedIn) {
         return <Navigate to="/login" />
     }
 
@@ -66,8 +48,8 @@ const ProfilePage = () => {
                 <p className="text-center pb-2 text-3xl">Profile</p>
 
                 <div className="pb-5 my-5">
-                    <p>Current User: {username}</p>
-                    <p>Current Email: {user}</p>
+                    <p>Current User: {user.name}</p>
+                    <p>Current Email: {user.email}</p>
                 </div>
 
                 {/* Form is currently bugged, tries to run the function on any input */}
