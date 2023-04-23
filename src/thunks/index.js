@@ -10,6 +10,7 @@ const REGISTER_URL = BACKEND_URL + '/auth/signup'
 const ARTICLE_URL = BACKEND_URL + '/articles'
 const LOGOUT_URL = BACKEND_URL + '/auth/logout'
 const ID_URL = BACKEND_URL + '/user/'
+const CHANGE_EMAIL_URL = BACKEND_URL + '/user/changeemail'
 
 
 const api = axios.create({
@@ -74,6 +75,22 @@ export const getUserThunk = createAsyncThunk(
         }
         catch (err) {
             console.log("Error fetching data: ", err)
+            return err.response
+        }
+    }
+)
+
+// Thunk to update a user's email
+export const changeEmailThunk = createAsyncThunk(
+    'user/changeemail',
+    async(emailArgs) => {
+        try {
+            console.log("Email Update")
+            const res = await api.post(CHANGE_EMAIL_URL, emailArgs)
+            return res.data
+        }
+        catch (err) {
+            console.log("Error posting data: ", err)
             return err.response
         }
     }
