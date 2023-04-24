@@ -2,6 +2,7 @@ import axios from "axios";
 import { createAsyncThunk }
     from "@reduxjs/toolkit"
 import jwt_decode from 'jwt-decode'
+import { createSearchParams } from 'react-router-dom'
 
 
 const BACKEND_URL = process.env.BACKEND_API || 'http://localhost:5000/api'
@@ -128,8 +129,8 @@ export const searchArticlesThunk = createAsyncThunk(
     'search/searchArticles',
     async (searchQuery, thunkAPI) => {
         try {
-            console.log("IN THUNK: ", searchQuery)
-            const response = await api.get(ARTICLE_URL + '/search', { params: { q: searchQuery } })
+            //console.log("IN THUNK: ", searchQuery)
+            const response = await api.get(ARTICLE_URL + `/search?${createSearchParams({q: searchQuery})}`)
             return response.data
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data)
@@ -141,7 +142,7 @@ export const postCommentThunk = createAsyncThunk(
     'comments/postComment',
     async ({comment, articleId}, thunkAPI) => {
         try {
-            const response = await api.post(ARTICLE_URL + "/comment", { text: comment }, { params: { id: articleId }})
+            const response = await api.post(ARTICLE_URL + `/comment?${createSearchParams({id: articleId})}`, { text: comment })
             return response.data
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data)

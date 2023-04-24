@@ -6,6 +6,7 @@ const SearchBar = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const searchQuery = e.target[0].value;
+    console.log("Search query: ", searchQuery)
     navigate({pathname: `/search`, search: `?${createSearchParams({q: searchQuery})}`});
   }
   return (

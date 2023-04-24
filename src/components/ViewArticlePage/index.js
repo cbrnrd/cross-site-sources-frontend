@@ -41,12 +41,12 @@ const ViewArticlePage = () => {
                         <h1 className="text-3xl font-bold mb-2">{article.article.title}</h1>
                         <h4 className="text-xl font-bold mb-2">{article.article.author}</h4>
                         <p className="text-gray-600 mb-4">{article.article.content}</p>
-                        <a href={article.article.url} className="text-red-500 mb-3 text-s">Read more</a>
+                        <a href={article.article.url} target="_blank" className="text-red-500 mb-3 text-s">Read more</a>
                         <p className="text-gray-400 text-s">{article.article.likes} likes</p>
                     </div>
                 </div>)}
 
-            {!loading && article.article && <CommentBox articleId={article._id} />}
+            {!loading && article.article && <CommentBox articleId={article.article._id} />}
             {/* CommentsList component */}
             {!loading && article.article && <CommentsList comments={article.article.comments} />}
 

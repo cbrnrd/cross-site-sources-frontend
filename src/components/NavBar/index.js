@@ -21,7 +21,7 @@ const NavBar = () => {
   return (
     <nav className="bg-red-500 text-white px-4 py-3">
       <div className="flex justify-between items-center">
-        <Link className="text-lg font-bold" to='/'>XSS</Link>
+        <Link className="text-lg font-bold nav-header" to='/'>X Site Sources</Link>
         <ul className="flex">
           <li className="ml-4"><Link to='/'>Home</Link></li>
           {
