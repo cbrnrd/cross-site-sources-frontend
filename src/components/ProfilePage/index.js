@@ -1,4 +1,4 @@
-import {getArticle, registerThunk} from '../../thunks'
+import {changePasswordThunk, getArticle, registerThunk} from '../../thunks'
 import {getUserThunk, changeEmailThunk} from "../../thunks";
 import {useEffect, useState} from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux"
 const ProfilePage = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [newPassword, setPassword] = useState('')
     const [serverError, setServerError] = useState('')
     const { isLoggedIn, jwt, error } = useSelector(state => state.user)
     const dispatch = useDispatch()
@@ -24,6 +24,22 @@ const ProfilePage = () => {
                 navigate('/')
             }
 
+        } catch (err) {
+            console.log(err)
+            setServerError(err.response.data.message)
+        }
+    }
+    const changePassword = async (e) => {
+        e.preventDefault()
+        try {
+            const res = await dispatch(changePasswordThunk({userId, newPassword}))
+            console.log("res:: ", res)
+            if (res.meta.rejectedWithValue) {
+                setServerError(res.payload.message)
+                return
+            } else {
+                navigate('/')
+            }
         } catch (err) {
             console.log(err)
             setServerError(err.response.data.message)
@@ -65,9 +81,9 @@ const ProfilePage = () => {
                     <div className="pb-5">
                         <p className="text-center"> Change Password</p>
                             {/* m-0 doesn't seem to work, removed block*/}
-                            <input type="text" className="w-3/4 p-2 rounded shadow bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none" placeholder="New Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <input type="text" className="w-3/4 p-2 rounded shadow bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none" placeholder="New Password" value={newPassword} onChange={(e) => setPassword(e.target.value)} />
                             {/*Change register to changePass once working*/}
-                            <button type="submit" className="w-1/4 p-2 rounded custom-btn btn-5 text-red-500 bg-red-500" onClick={changeEmail}><span>Change</span></button>
+                            <button type="submit" className="w-1/4 p-2 rounded custom-btn btn-5 text-red-500 bg-red-500" onClick={changePassword}><span>Change</span></button>
                     </div>
                 </form>
 

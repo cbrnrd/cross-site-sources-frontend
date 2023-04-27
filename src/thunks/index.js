@@ -12,6 +12,7 @@ const ARTICLE_URL = BACKEND_URL + '/articles'
 const LOGOUT_URL = BACKEND_URL + '/auth/logout'
 const ID_URL = BACKEND_URL + '/user/'
 const CHANGE_EMAIL_URL = BACKEND_URL + '/user/changeemail'
+const CHANGE_PASSWORD_URL = BACKEND_URL + '/user/changepassword'
 
 
 const api = axios.create({
@@ -92,6 +93,22 @@ export const changeEmailThunk = createAsyncThunk(
         }
         catch (err) {
             console.log("Error posting data: ", err)
+            return err.response
+        }
+    }
+)
+
+// Thunk to update a user's password
+export const changePasswordThunk = createAsyncThunk(
+    'user/changepassword',
+    async(passwordArgs) => {
+        try {
+            console.log("Password Update")
+            const res = await api.post(CHANGE_PASSWORD_URL, passwordArgs)
+            return res.data
+        }
+        catch (err) {
+            console.log("Error posting data", err)
             return err.response
         }
     }
