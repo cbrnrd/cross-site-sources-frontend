@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { getFrontpageArticles, getArticle, postCommentThunk, deleteArticleThunk } from "../thunks"
+import { getFrontpageArticles, getArticle, postCommentThunk, deleteArticleThunk, deleteCommentThunk } from "../thunks"
 
 const initialState = {
     articles: [],
@@ -40,6 +40,11 @@ const articlesSlice = createSlice({
         },
         [deleteArticleThunk.fulfilled]: (state, action) => {
             state.articles = state.articles.filter(article => article.id !== action.payload)
+        },
+        [deleteCommentThunk.fulfilled]: (state, action) => {
+            if (state.article) {
+                state.article.comments = state.article.comments.filter(comment => comment.id !== action.payload)
+            }
         }
 
     }

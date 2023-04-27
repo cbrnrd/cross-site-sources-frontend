@@ -48,7 +48,7 @@ const ViewArticlePage = () => {
 
             {!loading && article.article && <CommentBox articleId={article.article._id} />}
             {/* CommentsList component */}
-            {!loading && article.article && <CommentsList comments={article.article.comments} />}
+            {!loading && article.article && <CommentsList articleId={article.article._id} comments={article.article.comments} />}
 
         </>
     )

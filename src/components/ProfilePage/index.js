@@ -81,7 +81,7 @@ const ProfilePage = () => {
                     <div className="pb-5">
                         <p className="text-center"> Change Password</p>
                             {/* m-0 doesn't seem to work, removed block*/}
-                            <input type="text" className="w-3/4 p-2 rounded shadow bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none" placeholder="New Password" value={newPassword} onChange={(e) => setPassword(e.target.value)} />
+                            <input type="password" className="w-3/4 p-2 rounded shadow bg-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent focus:outline-none" placeholder="New Password" value={newPassword} onChange={(e) => setPassword(e.target.value)} />
                             {/*Change register to changePass once working*/}
                             <button type="submit" className="w-1/4 p-2 rounded custom-btn btn-5 text-red-500 bg-red-500" onClick={changePassword}><span>Change</span></button>
                     </div>

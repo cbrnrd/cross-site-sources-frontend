@@ -208,3 +208,15 @@ export const isUserLoggedInThunk = createAsyncThunk(
         return false
     }
 )
+
+export const deleteCommentThunk = createAsyncThunk(
+    'comments/deleteComment',
+    async ({commentId}, thunkAPI) => {
+        try {
+            const response = await api.delete(ARTICLE_URL + `/comment/${commentId}`)
+            return response.data
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
+    }
+)
