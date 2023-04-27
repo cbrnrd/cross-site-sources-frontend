@@ -10,8 +10,9 @@ const HomeComponent = () => {
 
   return (
     <>
-        <SearchBar />
-        <ArticleCardGrid />
+      <h1 className="text-center font-bold mt-4 homepage-header">CROSS SITE SOURCES</h1>
+      <SearchBar />
+      <ArticleCardGrid />
     </>
   )
 }

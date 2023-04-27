@@ -162,11 +162,22 @@ export const likeArticleThunk = createAsyncThunk(
     }
 )
 
+export const deleteArticleThunk = createAsyncThunk(
+    'articles/deleteArticle',
+    async (articleId, thunkAPI) => {
+        try {
+            const response = await api.delete(ARTICLE_URL + `/${articleId}`)
+            return response.data
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
+    }
+)
+
 export const isUserLoggedInThunk = createAsyncThunk(
     'user/isUserLoggedIn',
     async () => {
-        // Check if jwt is expired
-        let jwt = localStorage.getItem('jwt')
+        const jwt = localStorage.getItem('jwt')
         if (jwt) {
             const decoded = jwt_decode(jwt)
             const currentTime = Date.now() / 1000

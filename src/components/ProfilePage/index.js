@@ -36,16 +36,7 @@ const ProfilePage = () => {
     useEffect(() => {
         dispatch(getUserThunk(userId))
     }, [])
-    /*
-    const changePass = async (e) => {
-        e.preventDefault()
-        try {
-            const res = await dispatch()
-            console.log("res:: ", res)
 
-        }
-    }
-*/
     if (! isLoggedIn) {
         return <Navigate to="/login" />
     }
@@ -59,6 +50,7 @@ const ProfilePage = () => {
                 <div className="pb-5 my-5">
                     <p>Current User: {user.name}</p>
                     <p>Current Email: {user.email}</p>
+                    <p>Current Role: {user.role}</p>
                 </div>
 
                 {/* Form is currently bugged, tries to run the function on any input */}

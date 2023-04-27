@@ -1,3 +1,8 @@
+@font-face {
+  font-family: PhelixBoomgartner;
+  src: url(../fonts/PhelixBoomgartner.ttf);
+}
+
 body {
   margin: 0;
   font-family: "Roboto Light", sans-serif;
@@ -116,5 +121,11 @@ code {
 }
 
 .nav-header {
-  font-family: 'Roboto Black', sans-serif;
+  font-family: 'PhelixBoomgartner';
+  font-size: 2.5rem;
+}
+
+.homepage-header {
+  font-family: 'PhelixBoomgartner';
+  font-size: 5rem;
 }

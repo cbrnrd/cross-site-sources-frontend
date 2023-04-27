@@ -19,6 +19,7 @@ const userSlice = createSlice({
         [loginThunk.fulfilled]: (state, action) => {
             state.isLoggedIn = true
             state.jwt = action.payload.token
+            console.log("JWT: ", jwt_decode(action.payload.token))
             state.role = jwt_decode(action.payload.token).role
             state.userId = jwt_decode(action.payload.token).userId
             localStorage.setItem('jwt', action.payload.token)
@@ -56,7 +57,10 @@ const userSlice = createSlice({
         },
         [isUserLoggedInThunk.fulfilled]: (state, action) => {
             console.log("Setting isLoggedIn to: ", action)
-            state.isLoggedIn = action
+            state.isLoggedIn = action.payload
+            state.jwt = localStorage.getItem('jwt')
+            state.role = jwt_decode(localStorage.getItem('jwt')).role
+            state.userId = jwt_decode(localStorage.getItem('jwt')).userId
         }
     }
 })
