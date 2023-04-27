@@ -55,6 +55,10 @@ const userSlice = createSlice({
             state.user = action.payload
             console.log(action.payload)
         },
+        [getUserThunk.rejected]: (state, action) => {
+            state.user = []
+            console.log(action.payload)
+        },
         [isUserLoggedInThunk.fulfilled]: (state, action) => {
             console.log("Setting isLoggedIn to: ", action)
             state.isLoggedIn = action.payload

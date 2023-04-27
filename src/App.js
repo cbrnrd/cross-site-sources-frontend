@@ -13,6 +13,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit'
 import articlesReducer from './reducers/articles-reducer';
 import userReducer from './reducers/user-reducer';
 import searchReducer from './reducers/search-reducer';
+import VisitProfilePage from "./components/VisitProfilePage";
 
 
 const store = configureStore({
@@ -37,6 +38,7 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/search" element={<SearchResultsPage />} />
             <Route path="/profile" element={<ProfilePage/>}/>
+            <Route path="/profile/:id" element={<VisitProfilePage/>}/>
           </Routes>
         </div>
       </BrowserRouter >

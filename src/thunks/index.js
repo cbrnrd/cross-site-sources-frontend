@@ -69,7 +69,7 @@ export const logoutThunk = createAsyncThunk(
 // Thunk to get ID data without logging out
 export const getUserThunk = createAsyncThunk(
     'user/user',
-    async(userId) => {
+    async(userId, thunkAPI) => {
         try {
             console.log("Getting ID")
             const res = await api.get(ID_URL + userId)
@@ -77,7 +77,7 @@ export const getUserThunk = createAsyncThunk(
         }
         catch (err) {
             console.log("Error fetching data: ", err)
-            return err.response
+            return thunkAPI.rejectWithValue(err.response.data)
         }
     }
 )
