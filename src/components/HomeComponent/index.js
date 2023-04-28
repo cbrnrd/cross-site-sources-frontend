@@ -2,11 +2,21 @@ import ArticleCardGrid from "../ArticleCardGrid"
 import SearchBar from "../SearchBar"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
-import { loginThunk } from "../../thunks"
+import { useEffect } from "react"
+import { loginThunk, getUserThunk } from "../../thunks"
 import jwt_decode from 'jwt-decode'
 
 
 const HomeComponent = () => {
+  const dispatch = useDispatch()
+  const { isLoggedIn, likedArticles, userId } = useSelector(state => state.user)
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      console.log("Getting user data")
+      dispatch(getUserThunk(userId))
+    }
+  }, [isLoggedIn])
 
   return (
     <>

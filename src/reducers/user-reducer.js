@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import {loginThunk, registerThunk, logoutThunk, getUserThunk, isUserLoggedInThunk } from "../thunks"
+import {loginThunk, registerThunk, logoutThunk, getUserThunk, isUserLoggedInThunk, likeArticleThunk, unlikeArticleThunk } from "../thunks"
 import jwt_decode from 'jwt-decode'
 
 const initialState = {
@@ -8,7 +8,8 @@ const initialState = {
     role: null,
     error: null,
     userId: null,
-    user: []
+    user: [],
+    likedArticles: [],
 }
 
 const userSlice = createSlice({
@@ -52,7 +53,9 @@ const userSlice = createSlice({
             localStorage.removeItem('jwt')
         },
         [getUserThunk.fulfilled]: (state, action) => {
+            console.log("Fullfilled getUserThunk: ", action.payload)
             state.user = action.payload
+            state.likedArticles = action.payload.likedArticles
             console.log(action.payload)
         },
         [getUserThunk.rejected]: (state, action) => {
@@ -65,6 +68,14 @@ const userSlice = createSlice({
             state.jwt = localStorage.getItem('jwt')
             state.role = jwt_decode(localStorage.getItem('jwt')).role
             state.userId = jwt_decode(localStorage.getItem('jwt')).userId
+        },
+        [likeArticleThunk.fulfilled]: (state, action) => {
+            state.likedArticles.push(action.payload)
+        },
+        [unlikeArticleThunk.fulfilled]: (state, action) => {
+
+            console.log("Unliking article: ", action.payload)
+            state.likedArticles = state.likedArticles.filter(article => article._id !== action.payload)
         }
     }
 })
