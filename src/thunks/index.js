@@ -55,7 +55,6 @@ export const logoutThunk = createAsyncThunk(
     async () => {
         try {
             const res = await api.get(LOGOUT_URL)
-            // Remote `jwt` from localStore
             localStorage.removeItem('jwt')
             return res.data
         }
@@ -128,9 +127,7 @@ export const getArticle = createAsyncThunk(
     'articles/getArticle',
     async (id) => {
         try {
-            console.log("Getting article with id: ", id, " from url: ", ARTICLE_URL + '/' + id)
             const res = await api.get(ARTICLE_URL + '/' + id)
-            console.log("Response from getArticle: ", res.data)
             return res.data
         } catch (err) {
             console.log("Error getting article: ", err)
@@ -143,7 +140,6 @@ export const searchArticlesThunk = createAsyncThunk(
     'search/searchArticles',
     async (searchQuery, thunkAPI) => {
         try {
-            //console.log("IN THUNK: ", searchQuery)
             const response = await api.get(ARTICLE_URL + `/search?${createSearchParams({q: searchQuery})}`)
             return response.data
         } catch (error) {

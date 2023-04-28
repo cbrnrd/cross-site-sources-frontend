@@ -8,7 +8,6 @@ const LikedArticlePage = () => {
     const { likedArticles, loading } = useSelector((state) => state.articles);
 
     useEffect(() => {
-        console.log("Getting liked articles")
         dispatch(getLikedArticlesThunk());
     }, []);
 
