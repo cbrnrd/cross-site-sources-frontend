@@ -14,7 +14,7 @@ import articlesReducer from './reducers/articles-reducer';
 import userReducer from './reducers/user-reducer';
 import searchReducer from './reducers/search-reducer';
 import VisitProfilePage from "./components/VisitProfilePage";
-
+import LikedArticlePage from './components/LikedArticlePage';
 
 const store = configureStore({
   reducer: {
@@ -39,6 +39,7 @@ function App() {
             <Route path="/search" element={<SearchResultsPage />} />
             <Route path="/profile" element={<ProfilePage/>}/>
             <Route path="/profile/:id" element={<VisitProfilePage/>}/>
+            <Route path="/liked" element={<LikedArticlePage/>}/>
           </Routes>
         </div>
       </BrowserRouter >

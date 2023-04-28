@@ -190,6 +190,18 @@ export const unlikeArticleThunk = createAsyncThunk(
     }
 )
 
+export const getLikedArticlesThunk = createAsyncThunk(
+    'articles/getLikedArticles',
+    async (thunkAPI) => {
+        try {
+            const response = await api.get(ARTICLE_URL + "/liked")
+            return response.data
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
+    }
+)
+
 export const deleteArticleThunk = createAsyncThunk(
     'articles/deleteArticle',
     async (articleId, thunkAPI) => {
