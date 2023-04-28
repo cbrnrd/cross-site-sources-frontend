@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteCommentThunk } from '../../thunks'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const CommentsList = ({ comments }) => {
     //console.log(comments)
@@ -23,7 +24,9 @@ const CommentsList = ({ comments }) => {
                             <div key={index} className="flex justify-between rounded-lg shadow-md p-4 mb-4">
                                 {/* Show comment author and content */}
                                 <div>
-                                    <h4 className="font-bold mb-2">{comment.username}</h4>
+                                    <Link to={`/profile/${comment.user}`} className="block mb-4 hover:text-red-500 transition ease-in duration-200 hover:scale-105 hover:underline transform outline outline-offset-2 outline-red-500
+                                    ">
+                                    <h4 className="font-bold mb-2">{comment.username}</h4></Link>
                                     <p className="text-gray-600">{comment.text}</p>
                                 </div>
                                 {/* Show delete button if user is the author of the comment */}
