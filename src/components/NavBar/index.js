@@ -20,16 +20,19 @@ const NavBar = () => {
       <div className="flex justify-between items-center">
         <Link className="text-lg font-bold nav-header" to='/'>XSS</Link>
         <ul className="flex">
-          <li className="ml-4"><Link to='/'>Home</Link></li>
+          <li className="ml-4 hover:underline transition ease-in duration-200"><Link to='/'>Home</Link></li>
           {
-            !isLoggedIn && <li className="ml-4"><Link to='/login'>Log In/Register</Link></li>
+            !isLoggedIn && <li className="ml-4 hover:underline transition ease-in duration-200"><Link to='/login'>Log In/Register</Link></li>
           }
           {
-            isLoggedIn && <li className="ml-4"><Link to='/profile'>Profile</Link></li>
+            isLoggedIn && <li className="ml-4 hover:underline transition ease-in duration-200"><Link to='/profile'>Profile</Link></li>
+          }
+          {
+            isLoggedIn && <li className="ml-4 hover:underline transition ease-in duration-200"><Link to='/liked'>Liked Articles</Link></li>
           }
           {
             isLoggedIn && 
-            <li className="ml-4" onClick={() => {
+            <li className="ml-4 hover:underline transition ease-in duration-200" onClick={() => {
               dispatch(logoutThunk())
               navigate('/')
             }}><Link to='/logout'>Log Out</Link></li>

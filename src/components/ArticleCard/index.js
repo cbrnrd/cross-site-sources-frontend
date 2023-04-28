@@ -4,16 +4,10 @@ import { likeArticleThunk, unlikeArticleThunk, deleteArticleThunk } from "../../
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-const ArticleCard = ({ article }) => {
+const ArticleCard = ({ article, showLikeButton = true }) => {
   const [likes, setLikes] = useState(article.likes);
   const { isLoggedIn, role, likedArticles } = useSelector((state) => state.user);
   const [isLiked, setIsLiked] = useState(likedArticles.includes(article._id));
-
-
-  // if (isLiked) {
-  //   console.log("Article is liked")
-  // }
-
   const isAdmin = role === "admin";
 
   const dispatch = useDispatch();
@@ -55,15 +49,15 @@ const ArticleCard = ({ article }) => {
         <p className="text-gray-400 text-xs">{likes} likes</p>
         { /* Add delete button if user is admin, otherwise do nothing*/}
         { isAdmin && <button onClick={deleteArticle} className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"><i className="fas fa-trash-alt"></i> Delete</button> }
-        { (!isLiked && isLoggedIn) ?
+        { showLikeButton && ((!isLiked && isLoggedIn) ?
           (<button onClick={likeArticle} className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded-md active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"><i
           className="far fa-thumbs-up" ></i> Like</button>) :
           (<button className="bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded-md active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"><i
-          className="far fa-thumbs-up" disabled></i> Like</button>)
+          className="far fa-thumbs-up" disabled></i> Like</button>))
         }
 
         {
-          isLiked && (
+          showLikeButton && isLiked && (
             <button onClick={unlikeArticle} className="bg-gray-500 hover:bg-gray-600 text-white px-2 py-1 rounded-md active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none"><i className="far fa-thumbs-down"></i> Unlike</button>
           )
         }
