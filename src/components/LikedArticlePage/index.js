@@ -21,7 +21,7 @@ const LikedArticlePage = () => {
             {
                 loading && <div className="text-3xl font-bold text-center">Loading...</div>
             }
-            {!loading && likedArticles && (<div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {!loading && likedArticles && likedArticles.articles && (<div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {likedArticles.articles.map((article) => (
                     <ArticleCard article={article} key={article._id} showLikeButton={false}/>
                 ))}
