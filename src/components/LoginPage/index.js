@@ -7,14 +7,13 @@ const LoginPage = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [serverError, setServerError] = useState('')
-    const { isLoggedIn, jwt } = useSelector(state => state.user)
+    const { isLoggedIn } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const login = async (e) => {
         e.preventDefault()
         try {
             const res = await dispatch(loginThunk({ email, password }))
-            console.log("res:: ", res)
             const statusCode = res.payload.status
             if (statusCode === 401) {
                 setServerError('Invalid credentials')

@@ -18,7 +18,6 @@ const CommentsList = ({ comments }) => {
             <div className="flex justify-center p-10">
                 <div className="w-1/2">
                     {comments.map((comment, index) => {
-                        console.log(comment)
                         if (comment === null) return;
                         return (
                             <div key={index} className="flex justify-between rounded-lg shadow-md p-4 mb-4">

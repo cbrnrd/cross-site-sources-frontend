@@ -1,9 +1,6 @@
 import SearchResults from "../SearchResults";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { searchArticlesThunk } from "../../thunks";
-import { searchBackend } from "../../service";
 
 
 const SearchResultsPage = () => {

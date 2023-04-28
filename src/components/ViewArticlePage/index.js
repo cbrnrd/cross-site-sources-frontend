@@ -2,16 +2,10 @@ import { useParams } from 'react-router-dom'
 import CommentsList from '../CommentsList'
 import CommentBox from '../CommentBox'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { getArticle } from '../../thunks'
-import { useState } from 'react'
-
-/*
-
-*/
 
 const ViewArticlePage = () => {
-    //const { articles, article, loading } = useSelector(state => state.articles)  // Get articles from redux store
 
     const { id } = useParams()  // Get article ID from URL
     const dispatch = useDispatch()  // Get dispatch function from redux store

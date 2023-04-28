@@ -1,9 +1,8 @@
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import {getUserThunk} from "../../thunks";
-import ProfilePage from "../ProfilePage";
 
 const VisitProfilePage = () => {
     const { id } = useParams();

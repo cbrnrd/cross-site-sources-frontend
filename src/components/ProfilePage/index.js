@@ -1,22 +1,19 @@
-import {changePasswordThunk, getArticle, registerThunk} from '../../thunks'
-import {getUserThunk, changeEmailThunk} from "../../thunks";
+import {getUserThunk, changeEmailThunk, changePasswordThunk} from "../../thunks";
 import {useEffect, useState} from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 
 const ProfilePage = () => {
-    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [newPassword, setPassword] = useState('')
-    const [serverError, setServerError] = useState('')
-    const { isLoggedIn, jwt, error } = useSelector(state => state.user)
+    const [ setServerError] = useState('')
+    const { isLoggedIn } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const changeEmail = async (e) => {
         e.preventDefault()
         try {
             const res = await dispatch(changeEmailThunk({ userId, email }))
-            console.log("res:: ", res)
             if (res.meta.rejectedWithValue) {
                 setServerError(res.payload.message)
                 return
@@ -25,7 +22,6 @@ const ProfilePage = () => {
             }
 
         } catch (err) {
-            console.log(err)
             setServerError(err.response.data.message)
         }
     }
@@ -46,7 +42,6 @@ const ProfilePage = () => {
         }
     }
 
-    // Not entirely sure what I'm doing
     let { userId, user } = useSelector(state => state.user)
 
     useEffect(() => {

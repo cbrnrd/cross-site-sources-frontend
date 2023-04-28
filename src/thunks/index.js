@@ -71,7 +71,6 @@ export const getUserThunk = createAsyncThunk(
     'user/user',
     async(userId, thunkAPI) => {
         try {
-            console.log("Getting ID")
             const res = await api.get(ID_URL + userId)
             return res.data.user
         }
@@ -87,7 +86,6 @@ export const changeEmailThunk = createAsyncThunk(
     'user/changeemail',
     async(emailArgs) => {
         try {
-            console.log("Email Update")
             const res = await api.post(CHANGE_EMAIL_URL, emailArgs)
             return res.data
         }
@@ -103,7 +101,6 @@ export const changePasswordThunk = createAsyncThunk(
     'user/changepassword',
     async(passwordArgs) => {
         try {
-            console.log("Password Update")
             const res = await api.post(CHANGE_PASSWORD_URL, passwordArgs)
             return res.data
         }

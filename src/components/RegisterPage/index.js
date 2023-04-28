@@ -1,21 +1,19 @@
 import { registerThunk } from '../../thunks'
 import { useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from "react-redux"
 
 const RegisterPage = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [serverError, setServerError] = useState('')
-    const { isLoggedIn, jwt, error } = useSelector(state => state.user)
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const register = async (e) => {
         e.preventDefault()
         try {
             const res = await dispatch(registerThunk({ email, name, password }))
-            console.log("res:: ", res)
             if (res.meta.rejectedWithValue) {
                 setServerError(res.payload.message)
                 return
@@ -29,16 +27,11 @@ const RegisterPage = () => {
         }
     }
 
-    // if (isLoggedIn) {
-    //     navigate('/')
-    // }
-
     return (
         <div className="h-screen min-h-screen max-h-screen bg-gray-200 flex justify-center items-center p-4">
             <div className="bg-white shadow w-full p-4 rounded shadow-2xl text-gray-700 sm:w-96">
 
                 <p className="text-center pb-2 text-3xl">Welcome</p>
-
 
                 <form action="#" className="my-5">
                     <div className="pb-5 text-sm text-center">

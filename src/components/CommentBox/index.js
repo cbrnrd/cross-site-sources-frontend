@@ -11,8 +11,6 @@ const CommentBox = ({ articleId }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Article ID: ", articleId)
-        console.log("Comment: ", comment);
         await dispatch(postCommentThunk({comment, articleId}));
         setComment("");
     }

@@ -1,10 +1,8 @@
 import ArticleCardGrid from "../ArticleCardGrid"
 import SearchBar from "../SearchBar"
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
-import { loginThunk, getUserThunk } from "../../thunks"
-import jwt_decode from 'jwt-decode'
+import { getUserThunk } from "../../thunks"
 
 
 const HomeComponent = () => {
